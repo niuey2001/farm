@@ -14,7 +14,7 @@ var health := 3:
 func _physics_process(_delta: float) -> void:
 	direction = (player.position - position).normalized()
 	velocity = direction * speed + push_direction
-	move_and_slide()
+	#move_and_slide()
 
 func push():
 	var tween = get_tree().create_tween()
