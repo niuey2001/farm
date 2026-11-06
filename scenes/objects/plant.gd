@@ -19,7 +19,7 @@ func grow(watered: bool):
 		res.decay(self)
 
 
-func _on_collision_area_body_entered(body: Node2D) -> void:
+func _on_collision_area_body_entered(_body: Node2D) -> void:
 	if res.get_complete():
 		$FlashSprite2D.flash(0.2,0.4,queue_free)
 		death.emit(coord)

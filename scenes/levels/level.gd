@@ -3,26 +3,34 @@ extends Node2D
 var plant_scene = preload("res://scenes/objects/plant.tscn")
 var plant_info_scene = preload("res://scenes/ui/plant_info.tscn")
 var used_cells: Array[Vector2i]
+var raining: bool:
+	set(value):
+		raining = value
+		$Layers/RainFloorParticles.emitting = value
+		$OverLay/RainDropsParticles.emitting = value
 @onready var daytransition_material = $OverLay/CanvasLayer/DayTransitionLayer.material
 @export var daytime_color: Gradient 
-
+@export var rain_color: Color
 
 func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 	var grid_coord: Vector2i = Vector2i( int (pos.x / Data.TILE_SIZE) ,int (pos.y / Data.TILE_SIZE))
 	grid_coord.x += -1 if pos.x < 0 else 0
 	grid_coord.y += -1 if pos.y < 0 else 0
 	var has_soid = grid_coord in $Layers/SoilLayer.get_used_cells()
+	
 	match tool:
 		Enum.Tool.HOE:
 			var cell = $Layers/GrassLayer.get_cell_tile_data(grid_coord) as TileData
 			if cell and cell.get_custom_data('farmable'):
 				$Layers/SoilLayer.set_cells_terrain_connect([grid_coord],0,0)
+			if raining:
+				$Layers/SoilWaterLayer.set_cell(grid_coord,0,Vector2i(randi_range(0,2),0))
 		Enum.Tool.WATER:
 			if  has_soid:
 				$Layers/SoilWaterLayer.set_cell(grid_coord,0,Vector2i(randi_range(0,2),0))
 		Enum.Tool.FISH:
 			if not grid_coord in $Layers/GrassLayer.get_used_cells():
-				print('fishing')
+				$Objects/Player.start_fishing()
 		Enum.Tool.SEED:
 			if  has_soid and grid_coord not in used_cells:
 				var plant_res = PlantResource.new()
@@ -43,9 +51,15 @@ func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 func _on_player_diagnose() -> void:
 	$OverLay/CanvasLayer/PlantInfoContainer.visible = not $OverLay/CanvasLayer/PlantInfoContainer.visible
 
+func _on_player_day_change() -> void:
+	day_restart()
+
+func _ready() -> void:
+	Data.forecast_rain = [true, false].pick_random()
+
 func _process(_delta: float) -> void:
 	var daytime_point = 1- $Timers/DayTimer.time_left 	/ $Timers/DayTimer.wait_time
-	var color = daytime_color.sample(daytime_point)
+	var color = daytime_color.sample(daytime_point).lerp(rain_color,0.5 if raining else 0.0 ) 
 	$OverLay/DayTimeColor.color = color 
 	if Input.is_action_just_pressed("day_change"):
 		day_restart()
@@ -60,6 +74,7 @@ func day_restart():
 	
 	
 func level_reset():
+	
 	for plant in get_tree().get_nodes_in_group('Plants'):
 		plant.grow(plant.coord in $Layers/SoilWaterLayer.get_used_cells())
 	$Layers/SoilWaterLayer.clear()
@@ -69,11 +84,20 @@ func level_reset():
 	for object in get_tree().get_nodes_in_group('Objects'):
 		if 'reset' in object:
 			object.reset()		
-			
-			
+	raining = Data.forecast_rain
+	Data.forecast_rain = [true, false].pick_random()
+	
+	if raining:
+		for cell in $Layers/SoilLayer.get_used_cells():
+			$Layers/SoilWaterLayer.set_cell(cell,0,Vector2i(randi_range(0,2),0))
+	
 	
 func plant_death(coord: Vector2i):
 	used_cells.erase(coord)
+
+
+	
+
 
 
 	

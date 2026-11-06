@@ -1,0 +1,151 @@
+[gd_scene format=4 uid="uid://cqhykhx23v1su"]
+
+[ext_resource type="Script" uid="uid://dorfc5hg7u6v6" path="res://scenes/levels/house.gd" id="1_g6yoe"]
+[ext_resource type="TileSet" uid="uid://cw45kfg2c8mfk" path="res://premade/HouseTileSet.tres" id="1_mfwd8"]
+[ext_resource type="Texture2D" uid="uid://dpvg3yddudamn" path="res://graphics/tilesets/walls_floor_tile.png" id="2_bbbus"]
+[ext_resource type="Texture2D" uid="uid://cwbhys0nypuq" path="res://graphics/tilesets/roof.png" id="4_jfia5"]
+[ext_resource type="PackedScene" uid="uid://dxxa2cdh5ipd1" path="res://scenes/levels/tv.tscn" id="5_ap60n"]
+[ext_resource type="PackedScene" uid="uid://b8llmw8weehkr" path="res://scenes/levels/bed.tscn" id="6_4yql1"]
+[ext_resource type="Texture2D" uid="uid://c6gdvovhpj0oj" path="res://graphics/objects/plant.png" id="7_dc68u"]
+[ext_resource type="Texture2D" uid="uid://dvaxmp1m08kte" path="res://graphics/objects/carpet.png" id="8_e6eqm"]
+[ext_resource type="Texture2D" uid="uid://baujryqqid5kt" path="res://graphics/objects/bookshelf.png" id="9_dg1t0"]
+[ext_resource type="Texture2D" uid="uid://pj3opopm7pns" path="res://graphics/objects/night stand.png" id="10_ctgqc"]
+[ext_resource type="Texture2D" uid="uid://b1eeactik3oq3" path="res://graphics/objects/table.png" id="11_op4as"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jfia5"]
+texture = ExtResource("2_bbbus")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_g6yoe"]
+sources/0 = SubResource("TileSetAtlasSource_jfia5")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ap60n"]
+texture = ExtResource("4_jfia5")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_bbbus"]
+sources/0 = SubResource("TileSetAtlasSource_ap60n")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2oxwf"]
+size = Vector2(6, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2n3d"]
+size = Vector2(22, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ctgqc"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0roj"]
+size = Vector2(20, 12)
+
+[node name="House" type="Node2D" unique_id=847158230]
+y_sort_enabled = true
+script = ExtResource("1_g6yoe")
+
+[node name="FloorLayer" type="TileMapLayer" parent="." unique_id=1785408351]
+z_index = -2
+tile_set = SubResource("TileSet_g6yoe")
+
+[node name="WallsLayer" type="TileMapLayer" parent="." unique_id=980881601]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAEAP7/AAACAAIAAAAEAP3/AAACAAEAAAAEAPz/AAACAAEAAAADAP7/AAABAAIAAAADAP3/AAABAAEAAAADAPz/AAABAAEAAAADAPv/AAABAAAAAAACAP7/AAABAAIAAAACAP3/AAABAAEAAAACAPz/AAABAAEAAAACAPv/AAABAAAAAAABAP7/AAAAAAQAAAABAP3/AAABAAEAAAABAPz/AAABAAEAAAABAPv/AAABAAAAAAAAAP7/AAABAAIAAAAAAP3/AAABAAEAAAAAAPz/AAABAAEAAAAAAPv/AAABAAAAAAD///3/AAABAAEAAAD///z/AAABAAEAAAD///v/AAABAAAAAAD+//7/AAAAAAIAAAD+//3/AAAAAAEAAAD+//z/AAAAAAEAAAD+//v/AAAAAAAAAAD///7/AAABAAIAAAAEAPv/AAACAAAAAAA=")
+tile_set = ExtResource("1_mfwd8")
+
+[node name="RootLayer" type="TileMapLayer" parent="." unique_id=864972652]
+z_index = 2
+tile_map_data = PackedByteArray("AAD+//7/AAAAAAUAAAD///7/AAABAAUAAAAAAP7/AAABAAUAAAABAP7/AAABAAUAAAACAP7/AAABAAUAAAADAP7/AAABAAUAAAAEAP7/AAABAAUAAAD+//3/AAAAAAMAAAD+//z/AAAAAAIAAAD///z/AAABAAIAAAAAAPz/AAABAAIAAAABAPz/AAABAAIAAAACAPz/AAABAAIAAAADAPz/AAABAAIAAAAEAPz/AAACAAIAAAD///3/AAABAAMAAAAAAP3/AAABAAMAAAABAP3/AAABAAMAAAACAP3/AAABAAMAAAADAP3/AAABAAMAAAAEAP3/AAACAAMAAAD+//r/AAAAAAAAAAAEAPr/AAACAAAAAAD///r/AAABAAAAAAAAAPr/AAABAAAAAAABAPr/AAABAAAAAAACAPr/AAABAAAAAAADAPr/AAABAAAAAAD+//v/AAAAAAEAAAD///v/AAABAAEAAAAAAPv/AAABAAEAAAABAPv/AAABAAEAAAACAPv/AAABAAEAAAADAPv/AAABAAEAAAAEAPv/AAACAAEAAAA=")
+tile_set = SubResource("TileSet_bbbus")
+
+[node name="HouseArea" type="Area2D" parent="." unique_id=1423356629]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HouseArea" unique_id=1949077873]
+visible = false
+polygon = PackedVector2Array(-30, -79, 78, -79, 78, -19, 33, -18, 33, -8, 17, -8, 16, -18, -31, -18)
+
+[node name="TV" parent="." unique_id=2090781248 instance=ExtResource("5_ap60n")]
+position = Vector2(4, -63)
+
+[node name="Bed" parent="." unique_id=1284902045 instance=ExtResource("6_4yql1")]
+position = Vector2(62, -40)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=185522740]
+position = Vector2(-20, -63)
+metadata/_edit_group_ = true
+
+[node name="Plant" type="Sprite2D" parent="StaticBody2D" unique_id=1166292152]
+texture = ExtResource("7_dc68u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1975715317]
+shape = SubResource("RectangleShape2D_2oxwf")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=849010369]
+position = Vector2(66, -66)
+metadata/_edit_group_ = true
+
+[node name="Plant" type="Sprite2D" parent="StaticBody2D2" unique_id=757473711]
+texture = ExtResource("7_dc68u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=648230320]
+shape = SubResource("RectangleShape2D_2oxwf")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=413496568]
+y_sort_enabled = true
+
+[node name="Bookshelf" type="Sprite2D" parent="StaticBody2D3" unique_id=498350017]
+position = Vector2(29, -66)
+texture = ExtResource("9_dg1t0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=1517950081]
+position = Vector2(29, -66)
+shape = SubResource("RectangleShape2D_w2n3d")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=1156942472]
+y_sort_enabled = true
+
+[node name="NightStand" type="Sprite2D" parent="StaticBody2D4" unique_id=1224810119]
+position = Vector2(49, -52)
+texture = ExtResource("10_ctgqc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=993053686]
+position = Vector2(49, -52)
+shape = SubResource("CapsuleShape2D_ctgqc")
+
+[node name="Carpet" type="Sprite2D" parent="." unique_id=1965477161]
+z_index = -1
+position = Vector2(61, -41.25)
+scale = Vector2(0.78124964, 0.9531251)
+texture = ExtResource("8_e6eqm")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="." unique_id=1223793532]
+y_sort_enabled = true
+
+[node name="Table" type="Sprite2D" parent="StaticBody2D5" unique_id=127333464]
+position = Vector2(-10, -36)
+texture = ExtResource("11_op4as")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5" unique_id=165065219]
+position = Vector2(-10, -37)
+shape = SubResource("RectangleShape2D_m0roj")
+
+[connection signal="body_entered" from="HouseArea" to="." method="_on_house_area_body_entered"]
+[connection signal="body_exited" from="HouseArea" to="." method="_on_house_area_body_exited"]
