@@ -9,7 +9,10 @@ class_name PlantResource extends Resource
 
 
 var age: float
-var death_count :=0
+var death_count :=0:
+	set(value):
+		death_count = value
+		emit_changed()	
 var dead: bool:
 	set(value):
 		dead = value
@@ -42,3 +45,5 @@ func decay(plant: StaticBody2D):
 func get_complete():
 	return age >=h_frames
 	
+func damage():
+	death_count += 1

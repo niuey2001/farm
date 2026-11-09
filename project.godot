@@ -25,11 +25,6 @@ Enum="*res://global/enums.gd"
 Data="*res://global/data.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
-[display]
-
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-
 [editor]
 
 version_control/plugin_name="GitPlugin"
