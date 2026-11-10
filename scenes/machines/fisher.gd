@@ -10,6 +10,7 @@ var direction := Vector2i.DOWN
 
 func setup (pos: Vector2i, level: Node2D, parent: Node2D):
 	var grass_layer = level.get_node("Layers/GrassLayer") as TileMapLayer
+	@warning_ignore("integer_division")
 	var adjusted_coord = pos / Data.TILE_SIZE
 	adjusted_coord.x += -1 if pos.x < 0 else 0
 	adjusted_coord.y += -1 if pos.y < 0 else 0

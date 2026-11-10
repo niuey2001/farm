@@ -3,9 +3,19 @@
 [ext_resource type="FontFile" uid="uid://pctatblkht3m" path="res://graphics/fonts/HomeVideo-Regular.ttf" id="1_v351s"]
 [ext_resource type="Texture2D" uid="uid://c8w5bgiupw84o" path="res://graphics/ui/frame.png" id="2_5x5vq"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_go8fd"]
+texture = ExtResource("2_5x5vq")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
 [sub_resource type="FontVariation" id="FontVariation_7rsbc"]
 base_font = ExtResource("1_v351s")
 spacing_glyph = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_go8fd"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kscek"]
 texture = ExtResource("2_5x5vq")
@@ -15,7 +25,9 @@ texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 
 [resource]
+Button/styles/normal = SubResource("StyleBoxTexture_go8fd")
 Label/colors/font_color = Color(0.023529412, 0.023529412, 0.023529412, 1)
 Label/font_sizes/font_size = 30
 Label/fonts/font = SubResource("FontVariation_7rsbc")
+Panel/styles/panel = SubResource("StyleBoxFlat_go8fd")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_kscek")

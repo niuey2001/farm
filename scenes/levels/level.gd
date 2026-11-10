@@ -85,8 +85,7 @@ func _on_player_machine_change(current_machine: int) -> void:
 
 func _ready() -> void:
 	Data.forecast_rain = [true, false].pick_random()
-	$Objects/ScareCrow.connect("shoot_projectile",create_projectile)
-
+	
 func create_projectile(start_pos:Vector2,dir:Vector2):
 	var projectile = projectile_scene.instantiate()
 	projectile.setup(start_pos,dir)
