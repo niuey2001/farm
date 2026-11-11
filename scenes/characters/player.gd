@@ -10,7 +10,9 @@ var current_tool: Enum.Tool = Enum.Tool.FISH
 var current_seed: Enum.Seed = Enum.Seed.TOMATO
 var current_state: Enum.State 
 var current_style: Enum.Style
+var current_style_index: int 
 var current_machine: Enum.Machine
+var current_machine_index: int
 
 
 signal tool_use(tool: Enum.Tool, pos: Vector2)
@@ -18,6 +20,7 @@ signal diagnose
 signal day_change
 signal build(current_machine: Enum.Machine)
 signal machine_change(current_machine: Enum.Machine)
+signal close_shop
 
 func _physics_process(_delta: float) -> void:
 	match current_state:
@@ -32,6 +35,8 @@ func _physics_process(_delta: float) -> void:
 			get_building_input()
 			move()
 			animate()
+		Enum.State.SHOP:
+			get_shopping_input()
 			
 	if direction:
 		last_direction = direction
@@ -57,13 +62,14 @@ func get_basic_input():
 		diagnose.emit() 	
 		
 	if Input.is_action_just_pressed("style_toggle"):
-		current_style = posmod(current_style + 1 ,Enum.Style.size()) as Enum.Style
+		current_style_index = posmod(current_style_index + 1 ,Data.unlocked_styles.size())
+		current_style = Data.unlocked_styles[current_style_index] as Enum.Style
 		$Sprite2D.texture = Data.PLAYER_SKINS[current_style]
 		
 	if Input.is_action_just_pressed("build"):
 		current_state = Enum.State.BUILDING
-	
-
+		current_machine =  Data.unlocked_machines[current_machine_index] as Enum.Machine
+		
 func get_fishing_input():
 	if Input.is_action_just_pressed("action"):
 		$FishingGame.action()
@@ -74,13 +80,17 @@ func get_building_input():
 		
 	if Input.is_action_just_pressed("tool_forward") or Input.is_action_just_pressed("tool_backward"):
 		var dir = Input.get_axis("tool_backward","tool_forward")
-		current_machine =  posmod(current_machine +  int(dir), Enum.Machine.size())  as Enum.Machine
+		current_machine_index =  posmod(current_machine_index +  int(dir), Data.unlocked_machines.size())  
+		current_machine =  Data.unlocked_machines[current_machine_index] as Enum.Machine
 		machine_change.emit(current_machine)
 	
 	if Input.is_action_just_pressed("action"):
 		build.emit(current_machine)	
 	
-
+func get_shopping_input():
+	if Input.is_action_just_pressed("ui_cancel"):
+		close_shop.emit()
+	
 func move():
 	direction = Input.get_vector("left","right","up","down")
 	velocity = direction * speed

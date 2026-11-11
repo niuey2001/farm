@@ -17,7 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://cn4s3loq3j21r" path="res://graphics/characters/cat.png" id="13_qhnmj"]
 [ext_resource type="Texture2D" uid="uid://da1u0rhfjt8a3" path="res://graphics/weather/drops.png" id="13_qogh7"]
 [ext_resource type="PackedScene" uid="uid://c423xo3vr8gm7" path="res://scenes/ui/shop_ui.tscn" id="16_qhnmj"]
-[ext_resource type="Texture2D" uid="uid://capn581vt8q7g" path="res://graphics/icons/sprinkler.png" id="18_qhnmj"]
+[ext_resource type="PackedScene" uid="uid://bjuiwygspkh17" path="res://scenes/ui/resource_ui.tscn" id="17_jyre1"]
+[ext_resource type="Texture2D" uid="uid://fnmyohadow27" path="res://graphics/icons/delete.png" id="18_qhnmj"]
 
 [sub_resource type="Gradient" id="Gradient_icy5c"]
 offsets = PackedFloat32Array(0, 0.30859375, 0.515625, 0.984375)
@@ -1168,6 +1169,7 @@ position = Vector2(100, 340)
 position = Vector2(142, 454)
 dialog = Array[String](["I am the hat mouse", "State your business!"])
 texture = ExtResource("12_5mi6g")
+shop_type = 1
 
 [node name="Character2" parent="Objects" unique_id=1263593818 instance=ExtResource("13_b8j7q")]
 position = Vector2(111, 420)
@@ -1193,6 +1195,8 @@ color = Color(0, 0, 0, 1)
 scale = Vector2(0.8, 0.8)
 
 [node name="ShopUI" parent="OverLay/CanvasLayer" unique_id=766404766 instance=ExtResource("16_qhnmj")]
+
+[node name="ResourceUI" parent="OverLay/CanvasLayer" unique_id=830203093 instance=ExtResource("17_jyre1")]
 
 [node name="RainDropsParticles" type="GPUParticles2D" parent="OverLay" unique_id=1733557201]
 material = SubResource("CanvasItemMaterial_mq31s")
@@ -1259,8 +1263,10 @@ position = Vector2(354, 601)
 position = Vector2(519, 581)
 
 [connection signal="build" from="Objects/Player" to="." method="_on_player_build"]
+[connection signal="close_shop" from="Objects/Player" to="." method="_on_player_close_shop"]
 [connection signal="day_change" from="Objects/Player" to="." method="_on_player_day_change"]
 [connection signal="diagnose" from="Objects/Player" to="." method="_on_player_diagnose"]
 [connection signal="machine_change" from="Objects/Player" to="." method="_on_player_machine_change"]
 [connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]
+[connection signal="close" from="OverLay/CanvasLayer/ShopUI" to="." method="_on_player_close_shop"]
 [connection signal="timeout" from="Timers/BlobTimer" to="." method="_on_blob_timer_timeout"]

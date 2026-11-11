@@ -45,3 +45,25 @@ const SOIL_DIRECTIONS = [
 		Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1),
 		Vector2i(-1,  0),Vector2i(1,0), Vector2i(-1,  1), 
 		Vector2i(0,  1), Vector2i(1,  1)]
+
+
+# shop
+const ICON_PATHS = {
+	Enum.Item.WOOD: "res://graphics/icons/wood.png",
+	Enum.Item.FISH: "res://graphics/icons/goldfish.png",
+	Enum.Item.APPLE: "res://graphics/icons/apple.png",
+	Enum.Item.CORN: "res://graphics/icons/corn.png",
+	Enum.Item.WHEAT: "res://graphics/icons/wheat.png",
+	Enum.Item.PUMPKIN: "res://graphics/icons/pumpkin.png",
+	Enum.Item.TOMATO: "res://graphics/icons/tomato.png"}
+
+
+# item textures
+const TEXTURES = {
+	Enum.Item.WOOD: preload("res://graphics/icons/wood.png"),
+	Enum.Item.APPLE: preload("res://graphics/icons/apple.png"),
+	Enum.Item.FISH: preload("res://graphics/icons/goldfish.png"),
+	Enum.Item.CORN: preload("res://graphics/icons/corn.png"),
+	Enum.Item.TOMATO: preload("res://graphics/icons/tomato.png"),
+	Enum.Item.PUMPKIN: preload("res://graphics/icons/pumpkin.png"),
+	Enum.Item.WHEAT: preload("res://graphics/icons/wheat.png")}

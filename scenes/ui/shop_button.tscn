@@ -2,16 +2,18 @@
 
 [ext_resource type="Theme" uid="uid://rhcgh2v8xs3h" path="res://scenes/ui/game_theme.tres" id="1_ofmg3"]
 [ext_resource type="Texture2D" uid="uid://bldxvi5dvro6k" path="res://graphics/icons/apple.png" id="2_8g3bp"]
+[ext_resource type="Script" uid="uid://bis20ut77on6h" path="res://scenes/ui/shop_button.gd" id="2_ehfxd"]
 [ext_resource type="Texture2D" uid="uid://bsx0onkeirxbt" path="res://graphics/icons/corn.png" id="3_go8fd"]
 
 [node name="ShopButton" type="Button" unique_id=1180035962]
 clip_children = 1
-custom_minimum_size = Vector2(200, 200)
-offset_right = 8.0
-offset_bottom = 8.0
+custom_minimum_size = Vector2(150, 200)
+offset_right = 20.0
+offset_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_ofmg3")
+script = ExtResource("2_ehfxd")
 
 [node name="BG" type="Panel" parent="." unique_id=1878577158]
 clip_children = 1
@@ -54,6 +56,7 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=809978123]
 layout_mode = 2
 size_flags_vertical = 6
+theme_override_font_sizes/font_size = 30
 text = "Apple"
 horizontal_alignment = 1
 
@@ -76,22 +79,30 @@ theme_override_constants/separation = 20
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/Control/HBoxContainer/HBoxContainer" unique_id=1457679210]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("3_go8fd")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/Control/HBoxContainer/HBoxContainer" unique_id=708035028]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "5"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Control/HBoxContainer" unique_id=1912701456]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/Control/HBoxContainer/HBoxContainer2" unique_id=1643144437]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("3_go8fd")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/Control/HBoxContainer/HBoxContainer2" unique_id=1011145009]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "5"
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

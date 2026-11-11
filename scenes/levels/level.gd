@@ -50,15 +50,23 @@ func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 				$Objects/Player.start_fishing()
 		Enum.Tool.SEED:
 			if  has_soid and grid_coord not in used_cells:
-				var plant_res = PlantResource.new()
-				plant_res.setup($Objects/Player.current_seed)
-				var plant = plant_scene.instantiate()
-				plant.setup(grid_coord,$Objects,plant_res,plant_death)
-				used_cells.append(grid_coord)
-				
-				var plant_info = plant_info_scene.instantiate()
-				plant_info.setup(plant_res)
-				$OverLay/CanvasLayer/PlantInfoContainer.add(plant_info)
+				var selected_item = {
+					Enum.Seed.TOMATO: Enum.Item.TOMATO,
+					Enum.Seed.CORN: Enum.Item.CORN,
+					Enum.Seed.PUMPKIN: Enum.Item.PUMPKIN,
+					Enum.Seed.WHEAT: Enum.Item.WHEAT
+				}[player.current_seed]
+				if Data.items[selected_item] > 0:
+					Data.change_item(selected_item,-1)
+					var plant_res = PlantResource.new()
+					plant_res.setup($Objects/Player.current_seed,selected_item)
+					var plant = plant_scene.instantiate()
+					plant.setup(grid_coord,$Objects,plant_res,plant_death)
+					used_cells.append(grid_coord)
+					
+					var plant_info = plant_info_scene.instantiate()
+					plant_info.setup(plant_res)
+					$OverLay/CanvasLayer/PlantInfoContainer.add(plant_info)
 				
 		Enum.Tool.AXE , Enum.Tool.SWORD:
 			for object in get_tree().get_nodes_in_group('Objects'):
@@ -83,8 +91,14 @@ func _on_player_build(current_machine: int) -> void:
 func _on_player_machine_change(current_machine: int) -> void:
 	$OverLay/MachinePreviewSprite.texture = MACHINE_PREVIEW_TEXTURES[current_machine]['texture']
 
+func _on_player_close_shop() -> void:
+	$OverLay/CanvasLayer/ShopUI.hide()
+	player.current_state = Enum.State.DEFAULT
+	
 func _ready() -> void:
 	Data.forecast_rain = [true, false].pick_random()
+	for character in get_tree().get_nodes_in_group("Characters"):
+		character.connect('open_shop', open_shop)
 	
 func create_projectile(start_pos:Vector2,dir:Vector2):
 	var projectile = projectile_scene.instantiate()
@@ -153,3 +167,8 @@ func _on_blob_timer_timeout() -> void:
 		var blob = blob_scene.instantiate()
 		var pos = $BlobSpawnPositions.get_children().pick_random().position
 		blob.setup(pos, plants.pick_random(),$Objects)
+
+
+func open_shop(shop_type: Enum.Shop):
+	$OverLay/CanvasLayer/ShopUI.reveal(shop_type)
+	player.current_state = Enum.State.SHOP
