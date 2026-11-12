@@ -48,3 +48,4 @@ func hit(tool: Enum.Tool,dir = Vector2.ZERO):
 func death():
 	speed = 0
 	$AnimationPlayer.current_animation = 'explode'
+	

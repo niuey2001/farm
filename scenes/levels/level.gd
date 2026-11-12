@@ -16,9 +16,11 @@ var raining: bool:
 		raining = value
 		$Layers/RainFloorParticles.emitting = value
 		$OverLay/RainDropsParticles.emitting = value
+		$Music/Rain.playing = value
 @onready var daytransition_material = $OverLay/CanvasLayer/DayTransitionLayer.material
 @export var daytime_color: Gradient 
 @export var rain_color: Color
+@export var volume_curve: Curve
 @onready var player = $Objects/Player
 
 const MACHINE_PREVIEW_TEXTURES = {
@@ -108,6 +110,7 @@ func create_projectile(start_pos:Vector2,dir:Vector2):
 func _process(_delta: float) -> void:
 	var daytime_point = 1- $Timers/DayTimer.time_left 	/ $Timers/DayTimer.wait_time
 	var color = daytime_color.sample(daytime_point).lerp(rain_color,0.5 if raining else 0.0 ) 
+	$Music/BGMusic.volume_db = volume_curve.sample(daytime_point)
 	$OverLay/DayTimeColor.color = color 
 	if Input.is_action_just_pressed("day_change"):
 		day_restart()

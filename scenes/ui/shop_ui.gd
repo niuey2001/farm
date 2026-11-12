@@ -21,4 +21,5 @@ func reveal(shop_type: Enum.Shop = Enum.Shop.HAT):
 	else:
 		await get_tree().process_frame
 		close.emit()
+		get_tree().get_first_node_in_group("ResourceUI").hide()
 			

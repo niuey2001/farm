@@ -12,11 +12,15 @@ const TEXTURES = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	hide()
 	for i:Enum.Item in Data.items.keys():
 		var resource_texture = resource_texture_scene.instantiate()
 		resource_texture.setup(i,TEXTURES[i])
 		$HBoxContainer.add_child(resource_texture)
 
-func reveal():
+func reveal(auto_hide: bool = true):
 	for i in $HBoxContainer.get_children():
 		i.update()
+	show()
+	if auto_hide:
+		$HideTimer.start()

@@ -4,6 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://bp3sfnx2rutrs" path="res://graphics/characters/main/main_basic.png" id="3_6eyoc"]
 [ext_resource type="PackedScene" uid="uid://brl0me0ik87pi" path="res://scenes/ui/tool_ui.tscn" id="3_76oj4"]
 [ext_resource type="PackedScene" uid="uid://cnckwi3d7eibr" path="res://scenes/ui/fishing_game.tscn" id="4_dyp2m"]
+[ext_resource type="AudioStream" uid="uid://dvtigt760l6wc" path="res://audio/axe.wav" id="5_atpat"]
+[ext_resource type="AudioStream" uid="uid://doray1iu4lcha" path="res://audio/fish.wav" id="6_kqtwu"]
+[ext_resource type="AudioStream" uid="uid://cdymyhvnjr52r" path="res://audio/hoe.wav" id="7_6eyoc"]
+[ext_resource type="AudioStream" uid="uid://8hhg528620wl" path="res://audio/seed.ogg" id="8_qgnko"]
+[ext_resource type="AudioStream" uid="uid://c3f7txlnei6mm" path="res://audio/water.ogg" id="9_7vyk4"]
+[ext_resource type="AudioStream" uid="uid://do4sqscm88cyg" path="res://audio/step.mp3" id="10_7vyk4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_atpat"]
 radius = 4.0
@@ -1601,10 +1607,10 @@ states/Sword/position = Vector2(927, 33.881012)
 states/Water/node = SubResource("AnimationNodeBlendSpace2D_tool_water")
 states/Water/position = Vector2(650, 250)
 transitions = ["Axe", "Hoe", SubResource("AnimationNodeStateMachineTransition_axe_to_hoe"), "Axe", "Seed", SubResource("AnimationNodeStateMachineTransition_axe_to_seed"), "Axe", "Sword", SubResource("AnimationNodeStateMachineTransition_axe_to_sword"), "Axe", "Water", SubResource("AnimationNodeStateMachineTransition_axe_to_water"), "Axe", "Fish", SubResource("AnimationNodeStateMachineTransition_axe_to_fish"), "Hoe", "Axe", SubResource("AnimationNodeStateMachineTransition_hoe_to_axe"), "Hoe", "Seed", SubResource("AnimationNodeStateMachineTransition_hoe_to_seed"), "Hoe", "Sword", SubResource("AnimationNodeStateMachineTransition_hoe_to_sword"), "Hoe", "Water", SubResource("AnimationNodeStateMachineTransition_hoe_to_water"), "Hoe", "Fish", SubResource("AnimationNodeStateMachineTransition_hoe_to_fish"), "Seed", "Axe", SubResource("AnimationNodeStateMachineTransition_seed_to_axe"), "Seed", "Hoe", SubResource("AnimationNodeStateMachineTransition_seed_to_hoe"), "Seed", "Sword", SubResource("AnimationNodeStateMachineTransition_seed_to_sword"), "Seed", "Water", SubResource("AnimationNodeStateMachineTransition_seed_to_water"), "Seed", "Fish", SubResource("AnimationNodeStateMachineTransition_seed_to_fish"), "Sword", "Axe", SubResource("AnimationNodeStateMachineTransition_sword_to_axe"), "Sword", "Hoe", SubResource("AnimationNodeStateMachineTransition_sword_to_hoe"), "Sword", "Seed", SubResource("AnimationNodeStateMachineTransition_sword_to_seed"), "Sword", "Water", SubResource("AnimationNodeStateMachineTransition_sword_to_water"), "Sword", "Fish", SubResource("AnimationNodeStateMachineTransition_sword_to_fish"), "Water", "Axe", SubResource("AnimationNodeStateMachineTransition_water_to_axe"), "Water", "Hoe", SubResource("AnimationNodeStateMachineTransition_water_to_hoe"), "Water", "Seed", SubResource("AnimationNodeStateMachineTransition_water_to_seed"), "Water", "Sword", SubResource("AnimationNodeStateMachineTransition_water_to_sword"), "Water", "Fish", SubResource("AnimationNodeStateMachineTransition_water_to_fish"), "Fish", "Axe", SubResource("AnimationNodeStateMachineTransition_fish_to_axe"), "Fish", "Hoe", SubResource("AnimationNodeStateMachineTransition_fish_to_hoe"), "Fish", "Seed", SubResource("AnimationNodeStateMachineTransition_fish_to_seed"), "Fish", "Sword", SubResource("AnimationNodeStateMachineTransition_fish_to_sword"), "Fish", "Water", SubResource("AnimationNodeStateMachineTransition_fish_to_water"), "Axe", "End", SubResource("AnimationNodeStateMachineTransition_kqtwu"), "Seed", "End", SubResource("AnimationNodeStateMachineTransition_6eyoc"), "Hoe", "End", SubResource("AnimationNodeStateMachineTransition_eojnx"), "Sword", "End", SubResource("AnimationNodeStateMachineTransition_qgnko"), "Fish", "End", SubResource("AnimationNodeStateMachineTransition_7vyk4"), "Water", "End", SubResource("AnimationNodeStateMachineTransition_2l4js"), "Start", "Hoe", SubResource("AnimationNodeStateMachineTransition_atpat")]
-graph_offset = Vector2(123, -139.11899)
+graph_offset = Vector2(85, -7.118988)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_inhyd"]
-graph_offset = Vector2(276.90173, 148.69183)
+graph_offset = Vector2(332.2674, 130.47632)
 nodes/output/position = Vector2(1580, 440)
 nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_yewv4")
 nodes/MoveStateMachine/position = Vector2(740, 280)
@@ -1627,6 +1633,7 @@ script = ExtResource("2_76oj4")
 texture = ExtResource("3_6eyoc")
 hframes = 33
 vframes = 4
+frame = 29
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1327211551]
 shape = SubResource("CapsuleShape2D_atpat")
@@ -1672,5 +1679,36 @@ collision_mask = 8
 [node name="FishingGame" parent="." unique_id=259564676 instance=ExtResource("4_dyp2m")]
 position = Vector2(40, 0)
 
+[node name="Sounds" type="Node2D" parent="." unique_id=174049125]
+
+[node name="Axe" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1985467919]
+stream = ExtResource("5_atpat")
+volume_db = 20.0
+
+[node name="Fish" type="AudioStreamPlayer2D" parent="Sounds" unique_id=2093852661]
+stream = ExtResource("6_kqtwu")
+volume_db = 10.0
+
+[node name="Hoe" type="AudioStreamPlayer2D" parent="Sounds" unique_id=438431052]
+stream = ExtResource("7_6eyoc")
+volume_db = 10.0
+
+[node name="Seed" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1349280755]
+stream = ExtResource("8_qgnko")
+volume_db = 10.0
+
+[node name="Water" type="AudioStreamPlayer2D" parent="Sounds" unique_id=217137486]
+stream = ExtResource("9_7vyk4")
+volume_db = 10.0
+
+[node name="Step" type="AudioStreamPlayer2D" parent="Sounds" unique_id=694408222]
+stream = ExtResource("10_7vyk4")
+volume_db = 4.0
+
+[node name="StepTimer" type="Timer" parent="Sounds" unique_id=609852187]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="animation_finished" from="Animation/AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="animation_started" from="Animation/AnimationTree" to="." method="_on_animation_tree_animation_started"]
+[connection signal="timeout" from="Sounds/StepTimer" to="." method="_on_step_timer_timeout"]

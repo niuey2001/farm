@@ -19,10 +19,17 @@
 [ext_resource type="PackedScene" uid="uid://c423xo3vr8gm7" path="res://scenes/ui/shop_ui.tscn" id="16_qhnmj"]
 [ext_resource type="PackedScene" uid="uid://bjuiwygspkh17" path="res://scenes/ui/resource_ui.tscn" id="17_jyre1"]
 [ext_resource type="Texture2D" uid="uid://fnmyohadow27" path="res://graphics/icons/delete.png" id="18_qhnmj"]
+[ext_resource type="AudioStream" uid="uid://cmmksm2j2lpov" path="res://audio/music.mp3" id="20_lp2ca"]
+[ext_resource type="AudioStream" uid="uid://cpi4s4v86b026" path="res://audio/rain.mp3" id="21_4ab0e"]
 
 [sub_resource type="Gradient" id="Gradient_icy5c"]
 offsets = PackedFloat32Array(0, 0.30859375, 0.515625, 0.984375)
 colors = PackedColorArray(0.92941177, 0.8627451, 0.8156863, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.36862746, 0.46666667, 1, 1)
+
+[sub_resource type="Curve" id="Curve_4ab0e"]
+_limits = [-30.0, 0.0, 0.0, 1.0]
+_data = [Vector2(0.0029850677, -12.992662), 0.0, 0.0, 0, 0, Vector2(0.27462688, -6.692307), 0.0, 0.0, 0, 0, Vector2(0.73134327, -6.692307), 0.0, 0.0, 0, 0, Vector2(0.9850746, -25.27574), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d4w6o"]
 texture = ExtResource("3_xb4v1")
@@ -942,6 +949,7 @@ anim_speed_max = 2.0
 script = ExtResource("1_urvlt")
 daytime_color = SubResource("Gradient_icy5c")
 rain_color = Color(0.8156863, 0.8156863, 0.8156863, 1)
+volume_curve = SubResource("Curve_4ab0e")
 metadata/_edit_vertical_guides_ = [-353.0, -187.0]
 
 [node name="Layers" type="Node2D" parent="." unique_id=376334799]
@@ -1037,7 +1045,7 @@ position = Vector2(-36, 587)
 position = Vector2(-125, 242)
 
 [node name="Tree24" parent="Objects" unique_id=1043891553 instance=ExtResource("7_mbbpy")]
-position = Vector2(152, 378)
+position = Vector2(79, 486)
 
 [node name="Tree25" parent="Objects" unique_id=1674325305 instance=ExtResource("7_mbbpy")]
 position = Vector2(-59, 287)
@@ -1166,14 +1174,17 @@ style1 = 0
 position = Vector2(100, 340)
 
 [node name="Character" parent="Objects" unique_id=1551641149 instance=ExtResource("13_b8j7q")]
-position = Vector2(142, 454)
+position = Vector2(161, 362)
 dialog = Array[String](["I am the hat mouse", "State your business!"])
+final_dialog = "you have purchased all the hats!"
 texture = ExtResource("12_5mi6g")
 shop_type = 1
+has_final_animation = true
 
 [node name="Character2" parent="Objects" unique_id=1263593818 instance=ExtResource("13_b8j7q")]
-position = Vector2(111, 420)
+position = Vector2(204, 360)
 dialog = Array[String](["I sell machines!", "What would you like?"])
+final_dialog = "Well done!"
 texture = ExtResource("13_qhnmj")
 
 [node name="OverLay" type="Node2D" parent="." unique_id=61676539]
@@ -1261,6 +1272,17 @@ position = Vector2(354, 601)
 
 [node name="Marker2D13" type="Marker2D" parent="BlobSpawnPositions" unique_id=623589496]
 position = Vector2(519, 581)
+
+[node name="Music" type="Node" parent="." unique_id=277868028]
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="Music" unique_id=244086031]
+stream = ExtResource("20_lp2ca")
+volume_db = -10.0
+autoplay = true
+
+[node name="Rain" type="AudioStreamPlayer" parent="Music" unique_id=211369908]
+stream = ExtResource("21_4ab0e")
+volume_db = -20.0
 
 [connection signal="build" from="Objects/Player" to="." method="_on_player_build"]
 [connection signal="close_shop" from="Objects/Player" to="." method="_on_player_close_shop"]

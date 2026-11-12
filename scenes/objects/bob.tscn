@@ -4,8 +4,9 @@
 [ext_resource type="Script" uid="uid://cgp5y02qcpvds" path="res://scenes/objects/bob.gd" id="1_pnc8u"]
 [ext_resource type="Shader" uid="uid://b6nm5dtkeitqy" path="res://shaders/flash.tres" id="2_pnc8u"]
 [ext_resource type="Texture2D" uid="uid://b466fqj7w4mne" path="res://graphics/characters/blob.png" id="3_bmvbu"]
+[ext_resource type="AudioStream" uid="uid://ca7wu5nswwv0y" path="res://audio/slime.ogg" id="5_bmvbu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnc8u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xuhr"]
 resource_local_to_scene = true
 shader = ExtResource("2_pnc8u")
 shader_parameter/Color = Color(1, 1, 1, 1)
@@ -31,7 +32,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_pnc8u"]
 resource_name = "explode"
-length = 1.4333333
+length = 1.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -58,6 +59,21 @@ tracks/1/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_bmvbu")
+}],
+"times": PackedFloat32Array(0.8)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_bmvbu"]
 resource_name = "move"
@@ -88,7 +104,7 @@ collision_layer = 4
 script = ExtResource("1_pnc8u")
 
 [node name="FlashSprite2D" parent="." unique_id=1463749478 instance=ExtResource("1_hssf4")]
-material = SubResource("ShaderMaterial_pnc8u")
+material = SubResource("ShaderMaterial_7xuhr")
 texture = ExtResource("3_bmvbu")
 hframes = 14
 vframes = 4
@@ -102,3 +118,5 @@ shape = SubResource("CircleShape2D_2oxwf")
 root_node = NodePath("../CollisionShape2D")
 libraries/ = SubResource("AnimationLibrary_7xuhr")
 autoplay = &"move"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=474948490]
