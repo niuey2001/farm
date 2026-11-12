@@ -4,6 +4,7 @@ var direction: Vector2
 var speed := 150
 
 func setup(start_pos: Vector2, new_direction: Vector2):
+	print('projectile setup')
 	position = start_pos 
 	direction = new_direction
 	

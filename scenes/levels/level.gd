@@ -29,7 +29,6 @@ const MACHINE_PREVIEW_TEXTURES = {
 	Enum.Machine.SCARECROW: {'texture':preload("res://graphics/icons/scarecrow.png"), 'offset': Vector2i(0,-4)},
 	Enum.Machine.DELETE: {'texture':preload("res://graphics/icons/delete.png"), 'offset': Vector2i(0,0)}}
 	
-	
 
 func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 	var grid_coord: Vector2i = Vector2i( int (pos.x / Data.TILE_SIZE) ,int (pos.y / Data.TILE_SIZE))

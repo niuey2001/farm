@@ -16,3 +16,8 @@ func get_nearest_blob(blobs: Array) -> CharacterBody2D:
 		if blob.position.distance_to(position) <= nearest.position.distance_to(position):
 			nearest = blob
 	return nearest
+	
+	
+func setup (pos: Vector2i, level: Node2D, parent: Node2D):
+	super.setup(pos, level, parent)
+	connect("shoot_projectile",level.create_projectile)
